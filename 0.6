@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: El usuario escribe la nota y hace clic en "Save"<br/>El navegador intercepta el submit con e.preventDefault()<br/>Crea el objeto nota, lo añade a la lista local y vuelve a renderizar el DOM
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate server
+    Note over browser,server: Payload (JSON): { "content": "mi nueva nota", "date": "2026-..." }
+    server-->>browser: HTTP 201 Created {"message": "note created"}
+    deactivate server
